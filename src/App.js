@@ -1,21 +1,23 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, {	Component } from 'react';
 import './App.css';
+import Map from "./components/Map"
+import foursquareAPI from './api'
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+    componentDidMount() {
+      foursquareAPI.search({
+        near: "Atlanta, GA",
+        query: "pizza",
+        limit: 10
+      }).then(results => console.log(results))
+    }
+	render() {
+		return (
+      <div className = "App">
+        <Map />
       </div>
-    );
-  }
+		);
+	}
 }
 
 export default App;
